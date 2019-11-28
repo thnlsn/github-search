@@ -1,12 +1,16 @@
 import React, { Fragment, Component } from 'react';
+import Navbar from './components/layout/Navbar';
+import Users from './components/users/Users';
 import './App.css';
 
 class App extends Component {
   render() {
-    const name = 'John Doe';
     return (
       <div className='App'>
-        <h1>Hello from React</h1>
+        <Navbar />
+        <div className='container'>
+          <Users />
+        </div>
       </div>
     );
   }
