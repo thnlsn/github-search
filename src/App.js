@@ -1,10 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import Users from './components/users/Users';
 import Search from './components/users/Search';
 import Alert from './components/layout/Alert';
-import './App.css';
+import About from './components/pages/About';
 import Axios from 'axios';
+import './App.css';
 
 class App extends Component {
   state = {
@@ -42,26 +44,40 @@ class App extends Component {
     setTimeout(() => this.setState({ alert: null }), 5000);
   };
 
+  //▓▓ Remove Alert
   removeAlert = () => this.setState({ alert: null });
 
   render() {
     const { loading, users, alert } = this.state;
 
     return (
-      <div className='App'>
-        <Navbar />
-        <div className='container'>
-          <Search
-            searchUsers={this.searchUsers}
-            clearUsers={this.clearUsers}
-            showClear={users.length > 0 ? true : false}
-            setAlert={this.setAlert}
-            removeAlert={this.removeAlert}
-          />
-          <Alert alert={alert} />
-          <Users loading={loading} users={users} />
+      <Router>
+        <div className='App'>
+          <Navbar />
+          <div className='container'>
+            <Alert alert={alert} />
+            <Switch>
+              <Route
+                exact
+                path='/'
+                render={props => (
+                  <Fragment>
+                    <Search
+                      searchUsers={this.searchUsers}
+                      clearUsers={this.clearUsers}
+                      showClear={users.length > 0 ? true : false}
+                      setAlert={this.setAlert}
+                      removeAlert={this.removeAlert}
+                    />
+                    <Users loading={loading} users={users} />
+                  </Fragment>
+                )}
+              />
+              <Route exact path='/about' component={About} />
+            </Switch>
+          </div>
         </div>
-      </div>
+      </Router>
     );
   }
 }
