@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import Navbar from './components/layout/Navbar';
 import Users from './components/users/Users';
 import Search from './components/users/Search';
+import Alert from './components/layout/Alert';
 import './App.css';
 import Axios from 'axios';
 
 class App extends Component {
   state = {
     users: [],
-    loading: false // false so that we can add a loading spinner for when it is true
+    loading: false, // false so that we can add a loading spinner for when it is true
+    alert: null
   };
 
   /*   async componentDidMount() {
@@ -19,7 +21,7 @@ class App extends Component {
     this.setState({ users: res.data, loading: false });
   } */
 
-  // Search GitHub users (passed into the Search component as a prop)
+  //▓▓ Search GitHub users (passed into the Search component as a prop)
   searchUsers = async search => {
     this.setState({ loading: true });
 
@@ -31,11 +33,19 @@ class App extends Component {
     this.setState({ users: res.data.items, loading: false });
   };
 
-  // Clear users from state (passed into search component as a prop)
+  //▓▓ Clear users from state (passed into search component as a prop)
   clearUsers = () => this.setState({ users: [], loading: false });
 
+  //▓▓ Set Alert
+  setAlert = (msg, type) => {
+    this.setState({ alert: { msg, type } }); // Normally would have (key: value) (msg: msg, type: type), but because it is same, just (msg, type)
+    setTimeout(() => this.setState({ alert: null }), 5000);
+  };
+
+  removeAlert = () => this.setState({ alert: null });
+
   render() {
-    const { loading, users } = this.state;
+    const { loading, users, alert } = this.state;
 
     return (
       <div className='App'>
@@ -45,7 +55,10 @@ class App extends Component {
             searchUsers={this.searchUsers}
             clearUsers={this.clearUsers}
             showClear={users.length > 0 ? true : false}
+            setAlert={this.setAlert}
+            removeAlert={this.removeAlert}
           />
+          <Alert alert={alert} />
           <Users loading={loading} users={users} />
         </div>
       </div>
