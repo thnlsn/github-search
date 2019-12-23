@@ -44,7 +44,7 @@ class App extends Component {
     const res = await Axios.get(
       `https://api.github.com/users/${username}?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
     );
-    console.log(res.data.items); 
+    console.log(res.data);
     
     this.setState({ user: res.data, loading: false });
   }
@@ -72,7 +72,7 @@ class App extends Component {
           <div className='container'>
             <Alert alert={alert} />
             <Switch>
-              <Route
+              <Route 
                 exact path='/' // This exact path will render the search component
                 render={props => (
                   <Fragment>
@@ -87,10 +87,14 @@ class App extends Component {
                   </Fragment>
                 )}
               />
-              <Route exact path='/about' /* No render function because no props needed */ component={About} />
-              <Route exact path='/user/:login' render={props => (
-                // user will be filled with the response from get user, which will be found in state once called
-                <User {...props} getUser = {this.getUser} user={user} loaidng={loading}/>
+              <Route 
+                exact path='/about' /* No render function because no props needed */
+                component={About} />
+              <Route
+                exact path='/user/:login'
+                render={props => (
+                // user will be filled with the response from getUser(), which will be found in state once called
+                <User {...props} getUser = {this.getUser} user={user} loading={loading} />
               )} />
             </Switch>
           </div>
