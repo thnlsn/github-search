@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import Users from './components/users/Users';
+import User from './components/users/User';
 import Search from './components/users/Search';
 import Alert from './components/layout/Alert';
 import About from './components/pages/About';
@@ -11,6 +12,7 @@ import './App.css';
 class App extends Component {
   state = {
     users: [],
+    user: {},
     loading: false, // false so that we can add a loading spinner for when it is true
     alert: null
   };
@@ -35,7 +37,7 @@ class App extends Component {
     this.setState({ users: res.data.items, loading: false });
   };
 
-  // ▓▓ Get a single GitHub user
+  // ▓▓ Get a single GitHub user (? marks FIRST parameter of the search query)
   getUser = async username => {
     this.setState({ loading: true });
 
@@ -44,7 +46,7 @@ class App extends Component {
     );
     console.log(res.data.items); 
     
-    this.setState({ users: res.data.items, loading: false });
+    this.setState({ user: res.data, loading: false });
   }
 
 
@@ -61,7 +63,7 @@ class App extends Component {
   removeAlert = () => this.setState({ alert: null });
 
   render() {
-    const { loading, users, alert } = this.state;
+    const { loading, alert, users, user } = this.state;
 
     return (
       <Router>
@@ -71,8 +73,7 @@ class App extends Component {
             <Alert alert={alert} />
             <Switch>
               <Route
-                exact
-                path='/'
+                exact path='/' // This exact path will render the search component
                 render={props => (
                   <Fragment>
                     <Search
@@ -86,7 +87,11 @@ class App extends Component {
                   </Fragment>
                 )}
               />
-              <Route exact path='/about' component={About} />
+              <Route exact path='/about' /* No render function because no props needed */ component={About} />
+              <Route exact path='/user/:login' render={props => (
+                // user will be filled with the response from get user, which will be found in state once called
+                <User {...props} getUser = {this.getUser} user={user} loaidng={loading}/>
+              )} />
             </Switch>
           </div>
         </div>
