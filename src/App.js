@@ -59,7 +59,7 @@ class App extends Component {
         );
         console.log(res.data);
 
-        this.setState({ user: res.data, loading: false });
+        this.setState({ repos: res.data, loading: false });
     };
 
     //▓▓ Clear users from state (passed into search component as a prop)
@@ -75,7 +75,7 @@ class App extends Component {
     removeAlert = () => this.setState({ alert: null });
 
     render() {
-        const { loading, alert, users, user } = this.state;
+        const { loading, alert, users, user, repos } = this.state;
 
         return (
             <Router>
@@ -117,9 +117,10 @@ class App extends Component {
                                     // user will be filled with the response from getUser(), which will be found in state once called
                                     <User
                                         {...props}
-                                        getUserRepos={this.getUserRepos}
                                         getUser={this.getUser}
+                                        getUserRepos={this.getUserRepos}
                                         user={user}
+                                        repos={repos}
                                         loading={loading}
                                     />
                                 )}

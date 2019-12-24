@@ -8,7 +8,8 @@ import { Link } from 'react-router-dom'; // for the back button to go back to se
 export class User extends Component {
     // HOW DID match BECOME A PROP ???????????????????????????
     componentDidMount() {
-        this.props.getUser(this.props.match.params.login); // This is found in
+        this.props.getUser(this.props.match.params.login); // This is found in the props in (...props)
+        this.props.getUserRepos(this.props.match.params.login);
     }
 
     static propTypes = {
