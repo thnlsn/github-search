@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import Spinner from '../layout/Spinner';
+import Repos from '../repos/Repos';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom'; // for the back button to go back to searches and not empty
 
@@ -15,7 +16,9 @@ export class User extends Component {
     static propTypes = {
         loading: PropTypes.bool,
         user: PropTypes.object.isRequired,
-        getUser: PropTypes.func.isRequired
+        repos: PropTypes.array.isRequired,
+        getUser: PropTypes.func.isRequired,
+        getUserRepos: PropTypes.func.isRequired
     };
 
     render() {
@@ -35,7 +38,7 @@ export class User extends Component {
             hireable
         } = this.props.user;
 
-        const { loading } = this.props;
+        const { loading, repos } = this.props;
 
         if (loading) return <Spinner />;
 
@@ -112,6 +115,7 @@ export class User extends Component {
                         </div>
                     </div>
                 </div>
+                <Repos repos={repos} />
             </Fragment>
         );
     }
