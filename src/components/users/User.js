@@ -10,7 +10,9 @@ const User = ({ user, loading, getUser, getUserRepos, repos, match }) => {
     useEffect(() => {
         getUser(match.params.login);
         getUserRepos(match.params.login);
-    });
+        // eslint-disable-next-line
+    }, []); // COME BACK TO THIS... IT IS WIERD.
+    // useEffect() runs on ANY update, so it runs on a loop. The [] mimics componentDidMount() because that is where you would but cases for useEffect() to run, but empty [] means just once when it mounts.
 
     const {
         name,

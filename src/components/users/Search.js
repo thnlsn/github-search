@@ -5,7 +5,7 @@ const Search = ({
     searchUsers,
     showClear,
     clearUsers,
-    setAlert,
+    showAlert,
     removeAlert
 }) => {
     const [text, setText] = useState('');
@@ -13,7 +13,7 @@ const Search = ({
     const onSubmit = event => {
         event.preventDefault();
         if (text === '') {
-            setAlert('Please enter something', 'light');
+            showAlert('Please enter something', 'light');
         } else {
             searchUsers(text); // Passing in a prop from app
             setText('');
