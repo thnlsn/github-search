@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import GithubContext from '../../context/github/githubContext';
 
-const Search = ({ showClear, clearUsers, showAlert, removeAlert }) => {
+const Search = ({ showAlert, removeAlert }) => {
     const githubContext = useContext(GithubContext); // you can call anything (actions) from this variable
     const [text, setText] = useState('');
 

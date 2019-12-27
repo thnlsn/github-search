@@ -15,10 +15,12 @@ const User = ({ match }) => {
     // HOW DID match BECOME A PROP ???????????????????????????
     useEffect(() => {
         getUser(match.params.login);
-        getUserRepos(match.params.login);
+        getUserRepos(match.params.login, repoNum);
         // eslint-disable-next-line
     }, []); // COME BACK TO THIS... IT IS WIERD.
-    // useEffect() runs on ANY update, so it runs on a loop. The [] mimics componentDidMount() because that is where you would but cases for useEffect() to run, but empty [] means just once when it mounts.
+    // useEffect() runs on ANY update, so it runs on a loop. The [] mimics componentDidMount() because that is where you would but cases for useEffect() to run, but empty [] means just once when it mounts. d
+
+    /*     const onChange = event => setRepoNum(event.target.value); */
 
     const {
         name,
@@ -111,16 +113,37 @@ const User = ({ match }) => {
                     </div>
                 </div>
             </div>
-            <select>
-                <option value='five'>5</option>
-                <option value='ten'>10</option>
-                <option value='twenty-five'>25</option>
-                <option value='fifty'>50</option>
-                <option value='one-hundred'>100</option>
+            <select
+                value={repoNum}
+                onChange={event => {
+                    setRepoNum(event.target.value);
+                    getUser(match.params.login);
+                    getUserRepos(match.params.login, repoNum);
+                }}
+            >
+                <option value='5'>5</option>
+                <option value='10'>10</option>
+                <option value='25'>25</option>
+                <option value='50'>50</option>
+                <option value='100'>100</option>
             </select>
             <Repos repos={repos} />
         </Fragment>
     );
 };
+
+/* const Dropdown = ({ options }) => {
+    const [selectedOption, setSelectedOption] = useState(options[0].value);
+    return (
+        <select
+            value={selectedOption}
+            onChange={e => setSelectedOption(e.target.value)}
+        >
+            {options.map(o => (
+                <option value={o.value}>{o.label}</option>
+            ))}
+        </select>
+    );
+}; */
 
 export default User;
