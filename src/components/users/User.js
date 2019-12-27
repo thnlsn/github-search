@@ -1,11 +1,17 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useState, useEffect, useContext } from 'react';
 import Spinner from '../layout/Spinner';
 import Repos from '../repos/Repos';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom'; // for the back button to go back to searches and not empty
+import GithubContext from '../../context/github/githubContext';
 
 // No state here, just a lifecycle method
-const User = ({ user, loading, getUser, getUserRepos, repos, match }) => {
+const User = ({ match }) => {
+    const githubContext = useContext(GithubContext);
+
+    const { getUser, loading, user, repos, getUserRepos } = githubContext;
+
+    const [repoNum, setRepoNum] = useState('5');
+
     // HOW DID match BECOME A PROP ???????????????????????????
     useEffect(() => {
         getUser(match.params.login);
@@ -105,17 +111,16 @@ const User = ({ user, loading, getUser, getUserRepos, repos, match }) => {
                     </div>
                 </div>
             </div>
+            <select>
+                <option value='five'>5</option>
+                <option value='ten'>10</option>
+                <option value='twenty-five'>25</option>
+                <option value='fifty'>50</option>
+                <option value='one-hundred'>100</option>
+            </select>
             <Repos repos={repos} />
         </Fragment>
     );
-};
-
-User.propTypes = {
-    loading: PropTypes.bool,
-    user: PropTypes.object.isRequired,
-    repos: PropTypes.array.isRequired,
-    getUser: PropTypes.func.isRequired,
-    getUserRepos: PropTypes.func.isRequired
 };
 
 export default User;

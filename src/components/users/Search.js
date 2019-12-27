@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import GithubContext from '../../context/github/githubContext';
 
 const Search = ({ showClear, clearUsers, showAlert, removeAlert }) => {
-    const githubContext = useContext(GithubContext);
+    const githubContext = useContext(GithubContext); // you can call anything (actions) from this variable
     const [text, setText] = useState('');
 
     const onSubmit = event => {
@@ -35,8 +35,11 @@ const Search = ({ showClear, clearUsers, showAlert, removeAlert }) => {
                     className='btn btn-dark btn-block'
                 />
             </form>
-            {showClear && (
-                <button className='btn btn-lite btn-block' onClick={clearUsers}>
+            {githubContext.users.length > 0 && (
+                <button
+                    className='btn btn-lite btn-block'
+                    onClick={githubContext.clearUsers}
+                >
                     Clear
                 </button>
             )}
@@ -45,9 +48,6 @@ const Search = ({ showClear, clearUsers, showAlert, removeAlert }) => {
 };
 
 Search.propTypes = {
-    clearUsers: PropTypes.func.isRequired,
-    showClear: PropTypes.bool.isRequired,
-    setAlert: PropTypes.func.isRequired,
     removeAlert: PropTypes.func.isRequired
 };
 
