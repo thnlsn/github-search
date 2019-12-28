@@ -40,7 +40,7 @@ const User = ({ match }) => {
     return (
         <Fragment>
             <Link to='/' className='btn btn-light'>
-                Back to Search
+                <i class='fas fa-step-backward'></i> Back to Search
             </Link>
             Hireable:{' '}
             {hireable ? (
@@ -89,7 +89,13 @@ const User = ({ match }) => {
                         <li>
                             {blog && (
                                 <Fragment>
-                                    <strong>Website: </strong> {blog}
+                                    <strong>Website: </strong>{' '}
+                                    <a
+                                        className='link'
+                                        href={'https://' + blog}
+                                    >
+                                        {blog}
+                                    </a>
                                 </Fragment>
                             )}
                         </li>

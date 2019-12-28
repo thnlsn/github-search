@@ -8,6 +8,7 @@ import Alert from './components/layout/Alert';
 import About from './components/pages/About';
 
 import GithubState from './context/github/GithubState';
+import AlertState from './context/alert/AlertState';
 
 import './App.css';
 
@@ -25,36 +26,42 @@ const App = () => {
 
     return (
         <GithubState>
-            <Router>
-                <div className='App'>
-                    <Navbar />
-                    <div className='container'>
-                        <Alert alert={alert} />
-                        <Switch>
-                            <Route
-                                exact
-                                path='/' // This exact path will render the search component
-                                render={props => (
-                                    <Fragment>
-                                        <Search
-                                            showAlert={showAlert}
-                                            removeAlert={removeAlert}
-                                        />
-                                        <Users />
-                                    </Fragment>
-                                )}
-                            />
-                            <Route
-                                exact
-                                path='/about' /* No render function because no props needed */
-                                component={About}
-                            />
-                            <Route exact path='/user/:login' component={User} />
-                        </Switch>
+            <AlertState>
+                <Router>
+                    <div className='App'>
+                        <Navbar />
+                        <div className='container'>
+                            <Alert alert={alert} />
+                            <Switch>
+                                <Route
+                                    exact
+                                    path='/' // This exact path will render the search component
+                                    render={props => (
+                                        <Fragment>
+                                            <Search
+                                                showAlert={showAlert}
+                                                removeAlert={removeAlert}
+                                            />
+                                            <Users />
+                                        </Fragment>
+                                    )}
+                                />
+                                <Route
+                                    exact
+                                    path='/about' /* No render function because no props needed */
+                                    component={About}
+                                />
+                                <Route
+                                    exact
+                                    path='/user/:login'
+                                    component={User}
+                                />
+                            </Switch>
+                        </div>
                     </div>
-                </div>
-            </Router>
-        </GithubState>
+                </Router>
+            </GithubState>
+        </AlertState>
     );
 };
 
