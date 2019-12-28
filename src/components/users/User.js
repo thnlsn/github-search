@@ -4,23 +4,20 @@ import Repos from '../repos/Repos';
 import { Link } from 'react-router-dom'; // for the back button to go back to searches and not empty
 import GithubContext from '../../context/github/githubContext';
 
-// No state here, just a lifecycle method
 const User = ({ match }) => {
     const githubContext = useContext(GithubContext);
 
     const { getUser, loading, user, repos, getUserRepos } = githubContext;
 
-    const [repoNum, setRepoNum] = useState('5');
+    const [repoNum, setRepoNum] = useState(10);
 
     // HOW DID match BECOME A PROP ???????????????????????????
     useEffect(() => {
         getUser(match.params.login);
-        getUserRepos(match.params.login, repoNum);
+        getUserRepos(match.params.login);
         // eslint-disable-next-line
     }, []); // COME BACK TO THIS... IT IS WIERD.
     // useEffect() runs on ANY update, so it runs on a loop. The [] mimics componentDidMount() because that is where you would but cases for useEffect() to run, but empty [] means just once when it mounts. d
-
-    /*     const onChange = event => setRepoNum(event.target.value); */
 
     const {
         name,
@@ -98,7 +95,7 @@ const User = ({ match }) => {
                         </li>
                     </ul>
                 </div>
-                <div className='card text-center'>
+                <div className='card text-center grid-2'>
                     <div className='badge badge-primary'>
                         Followers: {followers}
                     </div>
@@ -113,37 +110,29 @@ const User = ({ match }) => {
                     </div>
                 </div>
             </div>
-            <select
-                value={repoNum}
-                onChange={event => {
-                    setRepoNum(event.target.value);
-                    getUser(match.params.login);
-                    getUserRepos(match.params.login, repoNum);
-                }}
-            >
-                <option value='5'>5</option>
-                <option value='10'>10</option>
-                <option value='25'>25</option>
-                <option value='50'>50</option>
-                <option value='100'>100</option>
-            </select>
-            <Repos repos={repos} />
+            <div className='card'>
+                <label htmlFor='map'>
+                    View past
+                    <select
+                        className='form-control'
+                        value={repoNum}
+                        onChange={event => {
+                            setRepoNum(parseInt(event.target.value, 10));
+                        }}
+                    >
+                        <option value='5'>5</option>
+                        <option value='10'>10</option>
+                        <option value='25'>25</option>
+                        <option value='50'>50</option>
+                        <option value='100'>100</option>
+                    </select>
+                    repositories...
+                </label>
+
+                <Repos repos={repos} repoNum={repoNum} />
+            </div>
         </Fragment>
     );
 };
-
-/* const Dropdown = ({ options }) => {
-    const [selectedOption, setSelectedOption] = useState(options[0].value);
-    return (
-        <select
-            value={selectedOption}
-            onChange={e => setSelectedOption(e.target.value)}
-        >
-            {options.map(o => (
-                <option value={o.value}>{o.label}</option>
-            ))}
-        </select>
-    );
-}; */
 
 export default User;

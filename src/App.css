@@ -412,3 +412,9 @@ table th {
         justify-content: center;
     }
 }
+
+select.form-control {
+    width: 60px;
+    display: inline-block;
+    margin: 0 0.2rem 0 0.2rem;
+}
