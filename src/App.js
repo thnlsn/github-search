@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import Users from './components/users/Users';
@@ -13,17 +13,6 @@ import AlertState from './context/alert/AlertState';
 import './App.css';
 
 const App = () => {
-    const [alert, setAlert] = useState(null);
-
-    //▓▓ Set Alert
-    const showAlert = (msg, type) => {
-        setAlert({ msg, type }); // Normally would have (key: value) (msg: msg, type: type), but because it is same, just (msg, type)
-        setTimeout(() => setAlert(null), 5000);
-    };
-
-    //▓▓ Remove Alert
-    const removeAlert = () => setAlert(null);
-
     return (
         <GithubState>
             <AlertState>
@@ -60,8 +49,8 @@ const App = () => {
                         </div>
                     </div>
                 </Router>
-            </GithubState>
-        </AlertState>
+            </AlertState>
+        </GithubState>
     );
 };
 

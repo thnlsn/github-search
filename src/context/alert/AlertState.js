@@ -32,7 +32,8 @@ const AlertState = props => {
             value={{
                 // EVERYTHING WE NEED AVAILABE MUST BE HERE
                 alert: state,
-                setAlert
+                setAlert,
+                removeAlert
             }}
         >
             {props.children}
