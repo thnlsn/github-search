@@ -8,7 +8,6 @@ import { SET_ALERT, REMOVE_ALERT } from '../types';
 
 const AlertState = props => {
     const initialState = null;
-    /*     const [alert, setAlert] = useState(null); */
 
     const [state, dispatch] = useReducer(AlertReducer, initialState);
 
@@ -24,7 +23,7 @@ const AlertState = props => {
 
     //▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
     // REMOVE_ALERT:
-    const removeAlert = () => setAlert(null);
+    const removeAlert = () => dispatch({ type: REMOVE_ALERT });
 
     //▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
     return (
