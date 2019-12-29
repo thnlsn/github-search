@@ -5,7 +5,7 @@
     --primary-color: #dc3545;
     --dark-color: #333333;
     --light-color: #f4f4f4;
-    --danger-color: #dc3545;
+    --good-color: #007bff;
     --success-color: #28a745;
 }
 
@@ -82,8 +82,8 @@ img {
     color: var(--success-color);
 }
 
-.text-danger {
-    color: var(--danger-color);
+.text-good {
+    color: var(--good-color);
 }
 
 .text-center {
@@ -269,11 +269,11 @@ img {
     color: #fff;
 }
 
-.btn-danger,
-.bg-danger,
-.badge-danger,
-.alert-danger {
-    background: var(--danger-color);
+.btn-good,
+.bg-good,
+.badge-good,
+.alert-good {
+    background: var(--good-color);
     color: #fff;
 }
 
@@ -420,5 +420,5 @@ select.form-control {
 }
 
 a.link {
-    color: steelblue;
+    color: #007bff;
 }

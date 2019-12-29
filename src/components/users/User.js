@@ -46,7 +46,7 @@ const User = ({ match }) => {
             {hireable ? (
                 <i className='fas fa-check text-success' />
             ) : (
-                <i className='fas fa-times-circle text-danger' />
+                <i className='fas fa-times-circle text-primary' />
             )}
             <div className='card grid-2'>
                 <div className='all-center'>
@@ -102,17 +102,17 @@ const User = ({ match }) => {
                     </ul>
                 </div>
                 <div className='card text-center grid-2'>
-                    <div className='badge badge-primary'>
+                    <div className='badge badge-good'>
                         Followers: {followers}
                     </div>
                     <div className='badge badge-success'>
                         Following: {following}
                     </div>
-                    <div className='badge badge-light'>
-                        Public Repos: {public_repos}
-                    </div>
                     <div className='badge badge-dark'>
                         Public Gists: {public_gists}
+                    </div>
+                    <div className='badge badge-light'>
+                        Public Repos: {public_repos}
                     </div>
                 </div>
             </div>
