@@ -1,4 +1,4 @@
-## GitHub Finder
+## GitHub Search
 
 <p align="center">
    <img src="../assets/GitHub Search | Large.gif?raw=true" />
@@ -33,7 +33,7 @@ If you would like to clone and run the project locally, follow the steps below.
 1. Clone the repo
 
 ```sh
-git clone git@github.com:thnlsn/github-finder.git
+git clone git@github.com:thnlsn/github-search.git
 ```
 
 2. Install NPM packages
