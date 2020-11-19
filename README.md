@@ -1,7 +1,7 @@
 ## GitHub Finder
 
 // <p align="center">
-//   <img src="../assets/Hyker | Large.gif?raw=true" />
+//   <img src="../assets/GitHub Search | Large.gif?raw=true" />
 // </p>
 
 <!-- ABOUT THE PROJECT -->
