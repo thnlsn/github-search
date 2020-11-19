@@ -20,6 +20,7 @@ Check it out on your phone or tablet, it's fully responsive!
 
 -   [React](https://reactjs.org/)
 -   [Context API](https://reactjs.org/docs/context.html)
+-   [GitHub REST API](https://docs.github.com/en/free-pro-team@latest/rest)
 
 <!-- GETTING STARTED -->
 
